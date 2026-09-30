@@ -1,0 +1,22 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name __CALENDAR_DOMAIN__;
+
+    location = /groups.json {
+        alias __PUBLISH_DIR__/current/groups.json;
+        default_type application/json;
+        add_header Cache-Control "public, max-age=300";
+    }
+
+    location ~ ^/calendar/(?<calendar_file>[a-z0-9-]+\.ics)$ {
+        alias __PUBLISH_DIR__/current/calendar/$calendar_file;
+        default_type text/calendar;
+        etag on;
+        add_header Cache-Control "public, max-age=300";
+    }
+
+    location / {
+        return 404;
+    }
+}
