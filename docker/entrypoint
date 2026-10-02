@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+# Populate the feeds before the scheduler begins accepting its normal cadence.
+/usr/local/bin/run-calendar
+
+# Keep cron in the foreground so Docker can manage the container lifecycle.
+exec crond -f -l 2

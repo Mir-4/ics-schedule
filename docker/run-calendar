@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+exec /usr/local/bin/uust-calendar \
+  -groups "${CALENDAR_GROUPS:?CALENDAR_GROUPS is required}" \
+  -output-dir "${CALENDAR_OUTPUT_DIR:?CALENDAR_OUTPUT_DIR is required}" \
+  -timezone "${CALENDAR_TIMEZONE:?CALENDAR_TIMEZONE is required}" \
+  -week-one-monday "${CALENDAR_WEEK_ONE_MONDAY:?CALENDAR_WEEK_ONE_MONDAY is required}" \
+  -request-interval "${CALENDAR_REQUEST_INTERVAL:?CALENDAR_REQUEST_INTERVAL is required}" \
+  -max-attempts "${CALENDAR_MAX_ATTEMPTS:?CALENDAR_MAX_ATTEMPTS is required}"
