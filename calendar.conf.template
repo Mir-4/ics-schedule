@@ -1,10 +1,10 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name __CALENDAR_DOMAIN__;
+    server_name ${CALENDAR_DOMAIN};
 
     location ~ ^/calendar/(?<calendar_file>[a-z0-9-]+\.ics)$ {
-        alias __PUBLISH_DIR__/current/calendar/$calendar_file;
+        alias ${PUBLISH_DIR}/calendar/$calendar_file;
         default_type text/calendar;
         etag on;
         add_header Cache-Control "public, max-age=300";
