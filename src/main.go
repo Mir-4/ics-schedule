@@ -42,9 +42,6 @@ func main() {
 	if err := os.MkdirAll(filepath.Join(*outputDir, "calendar"), 0o755); err != nil {
 		log.Fatal(err)
 	}
-	if err := writeCatalog(*outputDir, groups); err != nil {
-		log.Fatal(err)
-	}
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
