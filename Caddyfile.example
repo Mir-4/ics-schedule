@@ -1,0 +1,12 @@
+# Replace calendar.example.com with the hostname you want to publish, and replace
+# /path/to/ics-schedule with this project's absolute local path.
+calendar.example.com {
+	root * /path/to/ics-schedule/public
+
+	# Serve calendar/<group>.ics and any other generated static files.
+	file_server
+
+	# Calendar clients should download feeds rather than render them as text.
+@calendarFeeds path /calendar/*.ics
+header @calendarFeeds Content-Disposition "attachment"
+}

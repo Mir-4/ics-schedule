@@ -1,0 +1,18 @@
+services:
+  calendar:
+    build: .
+    init: true
+    environment:
+      # This also determines cron's midnight and six-hour boundaries.
+      TZ: Asia/Yekaterinburg
+      CALENDAR_GROUPS: /app/groups.json
+      CALENDAR_OUTPUT_DIR: /app/public
+      CALENDAR_TIMEZONE: Asia/Yekaterinburg
+      CALENDAR_WEEK_ONE_MONDAY: "2026-08-31"
+      CALENDAR_REQUEST_INTERVAL: 2s
+      CALENDAR_MAX_ATTEMPTS: "3"
+    volumes:
+      # Edit this catalog locally without rebuilding the image.
+      - ./groups.json:/app/groups.json:ro
+      # Generated calendar/*.ics feeds are written here.
+      - ./public:/app/public
