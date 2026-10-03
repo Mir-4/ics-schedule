@@ -16,18 +16,3 @@ services:
       - ./groups.json:/app/groups.json:ro
       # Generated calendar/*.ics feeds are written here.
       - ./public:/app/public
-
-  nginx:
-    image: nginx:1.27-alpine
-    depends_on:
-      - calendar
-    ports:
-      - "8080:80"
-    environment:
-      CALENDAR_DOMAIN: localhost
-      PUBLISH_DIR: /usr/share/nginx/html
-    volumes:
-      # Serve only the calendar generator's published output.
-      - ./public:/usr/share/nginx/html:ro
-      # The official Nginx image renders this into its active configuration.
-      - ./calendar.conf.template:/etc/nginx/templates/default.conf.template:ro
