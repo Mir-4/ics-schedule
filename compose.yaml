@@ -13,6 +13,6 @@ services:
       CALENDAR_MAX_ATTEMPTS: "3"
     volumes:
       # Edit this catalog locally without rebuilding the image.
-      - ./groups.json:/app/groups.json:ro
+      - ${CALENDAR_GROUPS_PATH:?Set CALENDAR_GROUPS_PATH in .env}:/app/groups.json:ro
       # Generated calendar/*.ics feeds are written here.
-      - ./public:/app/public
+      - ${CALENDAR_OUTPUT_PATH:?Set CALENDAR_OUTPUT_PATH in .env}:/app/public
