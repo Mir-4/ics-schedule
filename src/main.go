@@ -65,16 +65,11 @@ func main() {
 		if err != nil {
 			log.Fatalf("%s: %v", group.Slug, err)
 		}
-		calendar, err := Render(group.Name, lessons, time.Now())
-		if err != nil {
-			log.Fatalf("%s: %v", group.Slug, err)
-		}
-		path := filepath.Join(*outputDir, "calendar", group.Slug+".ics")
-		if err := writeAtomically(path, calendar); err != nil {
+		if err := publishGroupCalendars(filepath.Join(*outputDir, "calendar"), group, lessons, time.Now()); err != nil {
 			log.Fatalf("%s: %v", group.Slug, err)
 		}
 	}
-	log.Printf("published %d group feeds", len(groups))
+	log.Printf("published %d calendar feeds for %d groups", 2*len(groups), len(groups))
 }
 
 func loadGroups(path string) ([]Group, error) {
