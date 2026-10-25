@@ -2,7 +2,9 @@
 set -eu
 
 # Populate the feeds before the scheduler begins accepting its normal cadence.
-/usr/local/bin/run-calendar
+if ! /usr/local/bin/run-calendar; then
+  echo "Initial calendar refresh failed; keeping existing feeds and retrying at the next scheduled run." >&2
+fi
 
 # Keep cron in the foreground so Docker can manage the container lifecycle.
 exec crond -f -l 2
